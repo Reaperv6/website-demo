@@ -1,0 +1,348 @@
+@import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap');
+
+
+body {
+    font-family: 'Metal Mania', cursive;
+    margin: 0;
+}
+
+body.subpage {
+    background-color: black;
+}
+
+
+
+.Header {
+    text-align: center;
+    color: white;
+    z-index: 2;
+    position: relative;
+    font-family: 'Metal Mania', cursive;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    text-shadow: 
+        0px 3px 10px rgba(0, 0, 0, 0.8),
+        0 0 20px rgba(255, 255, 255, 0.15);
+    
+}
+
+.hero-image img {
+    image-rendering: auto;
+    width: 2345px;
+    height: 300px;
+    height: auto;
+    align-content: center;
+    display: block;
+    margin: 0 auto;
+    image-rendering: auto;
+    position:fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
+
+
+.site-menu {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+    font-size: 1.5rem;
+}
+
+.site-menu details {
+    position: relative;
+}
+
+.site-menu summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    color: white;
+    background-color: #6b0000;
+    border-radius: 5px;
+    cursor: pointer;
+    list-style: none;
+}
+
+.site-menu summary::-webkit-details-marker {
+    display: none;
+}
+
+.site-menu summary::after {
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    content: "";
+    transform: translateY(-3px) rotate(45deg);
+}
+
+.site-menu details[open] summary::after {
+    transform: translateY(3px) rotate(225deg);
+}
+
+.site-menu ul {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: max-content;
+    padding: 8px;
+    margin: 0;
+    background-color: #6b0000;
+    border-radius: 5px;
+    list-style: none;
+}
+
+.site-menu li + li {
+    margin-top: 4px;
+}
+
+.site-menu a {
+    display: block;
+    padding: 10px 14px;
+    color: white;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+.site-menu a:hover,
+.site-menu a:focus-visible {
+    background-color: #950000;
+}
+
+.menu {
+    position: fixed;
+    top: 500px;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    justify-content: center;
+    padding: 10px 20px;
+    margin: 0;
+    list-style: none;
+}
+
+.menu a {
+    padding: 15px 20px;
+    color: white;
+    background-color: #6b0000;
+    border-radius: 5px;
+    font-size: 40px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.site-menu summary:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+    .site-menu {
+        top: 12px;
+        right: 12px;
+        font-size: 1.25rem;
+    }
+}
+
+.video-container {
+    position: absolute;
+    top: 600px;
+    left: 50%;
+    z-index: 2;
+    width: min(85%, 560px);
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.video-container video {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.aboutpage p {
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.aboutpage h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: white;
+    text-align: center;
+}
+.aboutme p {
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.aboutme h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: white;
+    text-align: center;
+}
+
+.request-page {
+    min-height: 100vh;
+    padding: 1px 20px 48px;
+    color: white;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.94)),
+        url("image/wp4133280.jpg") center top / cover fixed,
+        #111;
+}
+
+.request-content {
+    width: min(100%, 760px);
+    margin: 70px auto 0;
+    font-family: "Courier New", Courier, monospace;
+}
+
+.request-heading {
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.request-heading h1 {
+    margin: 0;
+    font-family: "Metal Mania", cursive;
+    font-size: clamp(3rem, 8vw, 5rem);
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.8);
+}
+
+.request-heading p {
+    margin: 8px 0 0;
+    font-size: 1.05rem;
+}
+
+.request-panel {
+    padding: 24px;
+    margin: 20px 0;
+    background: rgba(15, 15, 15, 0.92);
+    border: 1px solid #6b0000;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.request-panel h2 {
+    margin: 0 0 18px;
+    font-family: "Metal Mania", cursive;
+    font-size: 2rem;
+}
+
+.request-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.request-fields label {
+    display: grid;
+    gap: 8px;
+    font-weight: bold;
+}
+
+.request-fields input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px;
+    color: white;
+    background: #222;
+    border: 1px solid #777;
+    border-radius: 4px;
+    font: inherit;
+}
+
+.request-fields input:focus-visible,
+.request-panel button:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+}
+
+.request-panel button {
+    padding: 11px 16px;
+    margin-top: 18px;
+    color: white;
+    background: #6b0000;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: bold;
+}
+
+.request-panel button:hover {
+    background: #950000;
+}
+
+.request-storage-note,
+.empty-requests,
+.request-message {
+    color: #d0d0d0;
+}
+
+.request-message {
+    min-height: 1.2em;
+    margin: 14px 0 0;
+}
+
+.request-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.request-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 0;
+    border-top: 1px solid #444;
+}
+
+.request-song {
+    overflow-wrap: anywhere;
+}
+
+.request-panel .remove-request {
+    flex: 0 0 auto;
+    padding: 8px 12px;
+    margin: 0;
+    background: #444;
+    font-size: 0.9rem;
+}
+
+.request-panel .remove-request:hover {
+    background: #6b0000;
+}
+
+.empty-requests {
+    margin-bottom: 0;
+}
+
+@media (max-width: 520px) {
+    .request-content {
+        margin-top: 84px;
+    }
+
+    .request-panel {
+        padding: 18px;
+    }
+
+    .request-fields {
+        grid-template-columns: 1fr;
+    }
+}

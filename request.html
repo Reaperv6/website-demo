@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Requests | Personal Studio</title>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body class="request-page">
+    <nav class="site-menu" aria-label="Main navigation">
+        <details>
+            <summary>Menu</summary>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="request.html" aria-current="page">Request</a></li>
+                <li><a href="drum-covers.html">Drum Covers</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </details>
+    </nav>
+
+    <main class="request-content">
+        <header class="request-heading">
+            <h1>SONG REQUESTS</h1>
+            <p>Have a song in mind for a drum cover? Add it to the list.</p>
+        </header>
+
+        <section class="request-panel" aria-labelledby="request-form-heading">
+            <h2 id="request-form-heading">Add a request</h2>
+            <form id="request-form">
+                <div class="request-fields">
+                    <label>
+                        Song title
+                        <input id="song-title" name="title" type="text" maxlength="120" required>
+                    </label>
+                    <label>
+                        Artist
+                        <input id="song-artist" name="artist" type="text" maxlength="120" required>
+                    </label>
+                </div>
+                <button type="submit">Add song</button>
+            </form>
+            <p id="request-message" class="request-message" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="request-panel" aria-labelledby="saved-requests-heading">
+            <h2 id="saved-requests-heading">Saved requests <span id="request-count">(0)</span></h2>
+            <p class="request-storage-note">This list is saved in this browser on this device.</p>
+            <ul id="request-list" class="request-list"></ul>
+            <p id="empty-requests" class="empty-requests">No requests yet. Add the first one above!</p>
+        </section>
+    </main>
+
+    <script>
+        const storageKey = "personalStudioSongRequests";
+        const requestForm = document.querySelector("#request-form");
+        const requestList = document.querySelector("#request-list");
+        const requestCount = document.querySelector("#request-count");
+        const emptyRequests = document.querySelector("#empty-requests");
+        const requestMessage = document.querySelector("#request-message");
+
+        function loadRequests() {
+            const savedRequests = localStorage.getItem(storageKey);
+            if (!savedRequests) {
+                return [];
+            }
+
+            const requests = JSON.parse(savedRequests);
+            if (!Array.isArray(requests)) {
+                throw new Error("Saved requests have an invalid format.");
+            }
+            return requests;
+        }
+
+        function saveRequests(requests) {
+            localStorage.setItem(storageKey, JSON.stringify(requests));
+        }
+
+        function renderRequests() {
+            const requests = loadRequests();
+            requestList.replaceChildren();
+            requestCount.textContent = `(${requests.length})`;
+            emptyRequests.hidden = requests.length > 0;
+
+            requests.forEach((request, index) => {
+                const item = document.createElement("li");
+                item.className = "request-item";
+
+                const song = document.createElement("span");
+                song.className = "request-song";
+                song.textContent = `${request.title} — ${request.artist}`;
+
+                const removeButton = document.createElement("button");
+                removeButton.className = "remove-request";
+                removeButton.type = "button";
+                removeButton.textContent = "Remove";
+                removeButton.setAttribute("aria-label", `Remove ${request.title} by ${request.artist}`);
+                removeButton.addEventListener("click", () => {
+                    try {
+                        const updatedRequests = loadRequests();
+                        updatedRequests.splice(index, 1);
+                        saveRequests(updatedRequests);
+                        renderRequests();
+                        requestMessage.textContent = "Request removed.";
+                    } catch (error) {
+                        requestMessage.textContent = "Could not update saved requests. Check that browser storage is enabled.";
+                    }
+                });
+
+                item.append(song, removeButton);
+                requestList.append(item);
+            });
+        }
+
+        requestForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const formData = new FormData(requestForm);
+            const newRequest = {
+                title: formData.get("title").trim(),
+                artist: formData.get("artist").trim()
+            };
+
+            try {
+                const requests = loadRequests();
+                requests.push(newRequest);
+                saveRequests(requests);
+                renderRequests();
+                requestForm.reset();
+                document.querySelector("#song-title").focus();
+                requestMessage.textContent = "Song request saved.";
+            } catch (error) {
+                requestMessage.textContent = "Could not save your request. Check that browser storage is enabled.";
+            }
+        });
+
+        try {
+            renderRequests();
+        } catch (error) {
+            requestMessage.textContent = "Could not load saved requests. Check that browser storage is enabled.";
+        }
+    </script>
+</body>
+</html>
